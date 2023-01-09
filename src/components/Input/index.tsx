@@ -14,13 +14,17 @@ interface ILogin {
 }
 
 function Input({ type, color, label, focused, name }: ILogin) {
-  const inputRef = useRef<any>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (focused) {
-      inputRef.current.focus();
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
     } else {
-      inputRef.current.blur();
+      if (inputRef.current) {
+        inputRef.current.blur();
+      }
     }
   }, [focused]);
 

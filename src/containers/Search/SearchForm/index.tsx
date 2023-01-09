@@ -2,15 +2,23 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { DataContext } from '../../../context/searchContext';
 import useSearch from './useSearch';
 
-function SearchForm({ focused }: any) {
-  const inputRef = useRef<any>(null);
+interface IFocused {
+  focused: boolean;
+}
+
+function SearchForm({ focused }: IFocused) {
+  const inputRef = useRef<HTMLInputElement>(null);
   const { search } = useContext(DataContext);
 
   useEffect(() => {
     if (focused) {
-      inputRef.current.focus();
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
     } else {
-      inputRef.current.blur();
+      if (inputRef.current) {
+        inputRef.current.blur();
+      }
     }
   }, [focused, search]);
 

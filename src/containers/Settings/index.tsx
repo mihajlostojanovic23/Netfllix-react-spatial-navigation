@@ -2,11 +2,15 @@ import React from 'react';
 import SettingSection from './SettingsSection';
 import { withFocusable } from '@noriginmedia/react-spatial-navigation';
 
+interface IFocused {
+  focused: boolean;
+}
+
 const FocusableSettingSection = withFocusable({ trackChildren: true })(
   SettingSection
 );
 
-function Settings({ focused }: any) {
+function Settings({ focused }: IFocused) {
   return (
     <div>
       <h1

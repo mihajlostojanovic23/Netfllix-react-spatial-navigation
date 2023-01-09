@@ -4,7 +4,7 @@ interface ISettings {
   id: number;
   label: string;
   focused: boolean;
-  correct: any;
+  correct: string;
 }
 
 function SettingItem({ id, label, focused, correct }: ISettings) {

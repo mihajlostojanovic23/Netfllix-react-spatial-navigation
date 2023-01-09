@@ -2,8 +2,8 @@ import { createContext, Dispatch, SetStateAction, useState } from 'react';
 
 //Inteface
 interface IUser {
-  userId: any;
-  setUserId: Dispatch<SetStateAction<any>>;
+  userId: number;
+  setUserId: Dispatch<SetStateAction<number>>;
   userInfo: any;
   setUserInfo: Dispatch<SetStateAction<any>>;
 }

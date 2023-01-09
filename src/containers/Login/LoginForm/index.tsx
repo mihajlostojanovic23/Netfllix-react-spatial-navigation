@@ -19,6 +19,11 @@ interface IDb {
   username: string;
   userid: string;
 }
+
+interface IOnSubmit {
+  values: { email: string; password: string };
+  setErrors: any;
+}
 function LoginForm() {
   // const { setUserId, setUserInfo } = useContext(UserContext);
   const history = useHistory();
@@ -39,7 +44,7 @@ function LoginForm() {
   });
 
   const onSubmit = ({ values, setErrors }: any) => {
-    console.log(values);
+    console.log(values, 'KEKE');
     const { email, password } = values;
 
     fetch('https://63aaf83fcf281dba8c1618ee.mockapi.io/netflix/users')
@@ -94,7 +99,7 @@ function LoginForm() {
                   focusKey={'SignIn-button'}
                   onEnterPress={() => onSubmit(formik)}
                   formik={formik}
-                  disabled={!formik.isValid || formik.isSubmitting}
+                  disabled={!formik.isValid || formik.dirty}
                 />
 
                 <span className="text-[20px]">Or</span>

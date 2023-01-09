@@ -6,16 +6,22 @@ import { withFocusable } from '@noriginmedia/react-spatial-navigation';
 //Settings
 import { SettingsData } from '../../../data/Settings';
 
-interface IFocused {
-  focused: boolean;
+interface ISetting {
+  id: number;
+  label: string;
+}
+
+interface IObject {
+  label: string;
 }
 
 const FocusableSetting = withFocusable()(SettingItem);
 
-function SettingSection({ focused }: IFocused) {
-  const [correct, setCorrect] = useState<any>(null);
+function SettingSection() {
+  const [correct, setCorrect] = useState<string>();
 
-  const handleOnEnter = (object: any) => {
+  const handleOnEnter = (object: IObject) => {
+    console.log(object, 'OB');
     setCorrect(object.label);
     console.log(object.label);
   };
@@ -27,7 +33,7 @@ function SettingSection({ focused }: IFocused) {
           <img style={{ width: '300px' }} src={Settings} alt="Not found" />
         </div>
         <div className="settings">
-          {SettingsData.map((setting): any => (
+          {SettingsData.map((setting: ISetting) => (
             <FocusableSetting
               focusKey={`Setting-Item-${setting.id}`}
               key={setting.id}

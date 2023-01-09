@@ -10,9 +10,20 @@ import Input from '../../../components/Input';
 const FocusableInput = withFocusable()(Input);
 const FocusableButton = withFocusable()(Button);
 
+interface IFormik {
+  isValid: boolean;
+  isSubmitting: boolean;
+}
+interface IInitialValues {
+  username?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+}
+
 function RegisterForm() {
   const history = useHistory();
-  const initialValues = {
+  const initialValues: IInitialValues = {
     username: '',
     email: '',
     password: '',
@@ -33,14 +44,14 @@ function RegisterForm() {
       .required('Required'),
   });
 
-  const onSubmit = (formik: any) => {
-    console.log(formik.formik.values);
+  const onSubmit = ({ formik }: any) => {
+    console.log(formik, 'onsubmit');
     fetch('https://63aaf83fcf281dba8c1618ee.mockapi.io/netflix/users', {
       method: 'POST',
       body: JSON.stringify({
-        username: formik.formik.values.username,
-        email: formik.formik.values.email,
-        password: formik.formik.values.password,
+        username: formik.values.username,
+        email: formik.values.email,
+        password: formik.values.password,
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -53,8 +64,9 @@ function RegisterForm() {
     history.push('/login');
   };
 
-  const submit = (formik: any) => {
+  const submit = (formik: IFormik) => {
     if (formik.isValid || formik.isSubmitting) {
+      console.log(formik, 'FORR');
       return onSubmit;
     }
   };
